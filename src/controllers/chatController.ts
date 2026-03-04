@@ -18,11 +18,8 @@ export const chat = async (req: Request, res: Response) => {
         `
 
         const chatSession = model.startChat({
-            history: [
-                { role: 'user', parts: [{ text: systemPrompt }] },
-                { role: 'model', parts: [{ text: "Halo Mimi! Kopi Kita AI siap sedia." }] },
-                ...history.map((h: any) => ({ role: h.role, parts: [{ text: h.content }] }))
-            ],
+            systemInstruction: systemPrompt,
+            history: history.map((h: any) => ({ role: h.role, parts: [{ text: h.content }] }))
         })
 
         console.log('Sending message to AI:', message)
